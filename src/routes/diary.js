@@ -1,8 +1,8 @@
 const express = require("express");
-const {nanoid} = require('nanoid');
+const {
+    v4: uuidv4,
+} = require('uuid');
 const router = express.Router();
-
-const idLength = 36;
 
 router.get('/', (req, res) => {
     let diary = req.app.db.get('diary').value();
@@ -10,32 +10,32 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    let todo = req.app.db
+    let observation = req.app.db
         .get('diary')
         .find({
             id: req.params.id
         })
         .value();
 
-    if (!todo) {
+    if (!observation) {
         res.sendStatus(404);
         return res.send({
             message: "Node cannot be found",
             internal_code: "Invalid id"
         });
     }
-    return res.send(todo);
+    return res.send(observation);
 });
 
 router.post('/', (req, res) => {
 
-    let todo = {
-        id: nanoid(idLength),
+    let observation = {
+        id: uuidv4(),
         ...req.body
     };
 
     try {
-        req.app.db.get("diary").push(todo).write();
+        req.app.db.get("diary").push(observation).write();
         return res.sendStatus(201).send("Node saved successfully");
     } catch (error) {
         return res.sendStatus(500).send(error);
@@ -44,18 +44,18 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
 
-    let todo = req.app.db.get("diary").find({
+    let observation = req.app.db.get("diary").find({
         id: req.params.id
     }).value();
 
-    if (!todo) return res.sendStatus(404);
+    if (!observation) return res.sendStatus(404);
 
     try {
         req.app.db.get("diary")
             .find({
                 id: req.params.id
             })
-            .assign({completed: !todo['completed']})
+            .assign({completed: !observation['completed']})
             .write();
         return res.send("Node updated");
     } catch (error) {
@@ -66,10 +66,10 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
 
-    let todo = req.app.db.get("diary").find({
+    let observation = req.app.db.get("diary").find({
         id: req.params.id
     }).value();
-    if (!todo) return res.sendStatus(404);
+    if (!observation) return res.sendStatus(404);
 
     try {
         req.app.db

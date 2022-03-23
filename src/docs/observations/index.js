@@ -1,9 +1,15 @@
-const getTodo = require('./get-observation');
+const getObservation = require('./get-observation');
+const getObservations = require('./get-observations');
+const postObservation = require('./post-observation');
 
 module.exports = {
     paths:{
-        '/todos/{id}':{
-            ...getTodo,
-        }
+        '/observations':{
+            ...getObservations,
+            ...postObservation,
+        },
+        '/observations/{id}':{
+            ...getObservation,
+        },
     }
 }

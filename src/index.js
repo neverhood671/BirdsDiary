@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const swaggerUI = require("swagger-ui-express");
 const docs = require('./docs');
-const todoRouter = require('./routes/diary');
+const diaryRouter = require('./routes/diary');
 
 const adapter = new FileSync(join(__dirname, '..', 'db.json'));
 const db = low(adapter);
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(morgan("dev"));
 app.use(cors());
-app.use('/diary', todoRouter);
+app.use('/diary', diaryRouter);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
 
 async function initialize() {
