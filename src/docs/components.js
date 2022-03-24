@@ -5,6 +5,46 @@ module.exports = {
                 type: "string",
                 format: "uuid"
             },
+            User: {
+                type: "object",
+                properties: {
+                    id: {
+                        type: "string",
+                        format: "uuid"
+                    },
+                    nickname: {
+                        type: "string",
+                        minLength: 1,
+                        maxLength: 50,
+                    },
+                    password: {
+                        type: "string",
+                        minLength: 6,
+                    }
+                }
+            },
+            Diary: {
+                type: "object",
+                properties: {
+                    id: {
+                        type: "string",
+                        format: "uuid",
+                        description: "Diary identification",
+                    },
+                    authorId: {
+                        type: "string",
+                        format: "uuid"
+                    },
+                    title: {
+                        type: "string",
+                        maxLength: 50,
+                    },
+                    description: {
+                        type: "string",
+                        maxLength: 200,
+                    }
+                }
+            },
             Observation: {
                 type: "object",
                 properties: {
