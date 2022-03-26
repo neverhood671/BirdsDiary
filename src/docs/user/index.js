@@ -1,8 +1,12 @@
-
-const postUser = require("./post-user");
+const singIn = require('./singin')
+const singUp = require("./singup");
 
 module.exports = {
-    '/user': {
-        ...postUser,
+    '/user/singin': {
+        ...singIn,
     },
+    '/user/singup': {
+        ...singUp,
+    }
 }
+

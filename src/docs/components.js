@@ -8,11 +8,7 @@ module.exports = {
             User: {
                 type: "object",
                 properties: {
-                    id: {
-                        type: "string",
-                        format: "uuid"
-                    },
-                    nickname: {
+                    username: {
                         type: "string",
                         minLength: 1,
                         maxLength: 50,

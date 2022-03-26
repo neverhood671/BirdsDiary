@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 const {
     v4: uuidv4,
 } = require('uuid');
@@ -10,29 +11,39 @@ function hashPassword(plaintextPassword) {
     return bcrypt.hashSync(plaintextPassword, salt);
 }
 
-function comparePassword(plaintextPassword, hashPassword) {
-    return bcrypt.compareSync(plaintextPassword, hashPassword);
-}
-
-router.post('/', (req, res) => {
-
-    const usernames = req.app.db.get('user').map('nickname').value()
+router.post('/singup', (req, res) => {
+    const db = req.app.db
+    const usernames = db.get('user').map('username').value()
     const isUsernameTaken = usernames.includes(req.body.username)
 
     if (isUsernameTaken) return res.sendStatus(409).send("This username is already taken")
 
-    const diary = {
+    const user = {
         id: uuidv4(),
-        author: req.body.nickname,
+        username: req.body.username,
         password: hashPassword(req.body.password)
     };
 
     try {
-        req.app.db.get("user").push(diary).write();
-        return res.sendStatus(201).send("User has been created");
+        db.get("user").push(user).write();
+        return res.sendStatus(201);
     } catch (error) {
-        return res.sendStatus(500).send(error);
+        return res.sendStatus(500);
     }
 });
+
+router.post(
+    '/singin',
+    (req, res, next) => passport.authenticate(
+        'local',
+        function(err, user, info) {
+            if (err) return res.status(500).send();
+            if (!user) return res.status(400).json({error:info});
+            req.logIn(user, function(err) {
+                if (err) return next(err);
+                return res.status(200).json('You are logged in!');
+            });
+        })(req, res, next)
+)
 
 module.exports = router;

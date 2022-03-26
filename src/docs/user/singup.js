@@ -1,8 +1,8 @@
 module.exports = {
     post: {
-        tags: ["User CRUD operations"],
-        description: "Create user",
-        operationId: "createUser",
+        tags: ["User operations"],
+        description: "SingUp",
+        operationId: "SingUp",
         parameters: [],
         requestBody: {
             content: {
