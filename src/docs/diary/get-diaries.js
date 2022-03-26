@@ -1,16 +1,16 @@
 module.exports = {
     get: {
-        tags: ["Observation CRUD operations"],
-        description: "Get all observations",
-        operationId: "getObservations",
+        tags: ["Diary CRUD operations"],
+        description: "Get all diaries",
+        operationId: "getDiaries",
         parameters: [],
         responses: {
             200: {
-                description: "Observations were obtained",
+                description: "Diaries were obtained",
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Observation",
+                            $ref: "#/components/schemas/Diary",
                         },
                     },
                 },

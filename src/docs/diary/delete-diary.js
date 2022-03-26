@@ -1,8 +1,8 @@
 module.exports = {
-    get: {
-        tags: ["Observation CRUD operations"],
-        description: "Get an observation by id",
-        operationId: "getObservation",
+    delete: {
+        tags: ["Diary CRUD operations"],
+        description: "Delete the diary by id",
+        operationId: "deleteDiary",
         parameters: [
             {
                 name: "id",
@@ -16,7 +16,7 @@ module.exports = {
         ],
         responses: {
             200: {
-                description: "Observation is obtained",
+                description: "Diary is deleted",
                 content: {
                     "application/json": {
                         schema: {
@@ -26,7 +26,7 @@ module.exports = {
                 },
             },
             404: {
-                description: "Observation is not found",
+                description: "Diary is not found",
                 content: {
                     "application/json": {
                         schema: {

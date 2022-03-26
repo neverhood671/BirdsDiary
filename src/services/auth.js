@@ -30,7 +30,6 @@ function configurePassport(passport, db) {
             if (!passwordsMatch) {
                 return done(null, false, {message: 'Invalid username or password.'});
             }
-            debugger
 
             return done(null, user)
         }

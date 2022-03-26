@@ -22,11 +22,6 @@ module.exports = {
             Diary: {
                 type: "object",
                 properties: {
-                    id: {
-                        type: "string",
-                        format: "uuid",
-                        description: "Diary identification",
-                    },
                     authorId: {
                         type: "string",
                         format: "uuid"

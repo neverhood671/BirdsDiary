@@ -1,13 +1,15 @@
 const getObservation = require('./get-observation');
 const getObservations = require('./get-observations');
 const postObservation = require('./post-observation');
+const deleteObservation = require('./delete-observation');
 
 module.exports = {
-    '/observations': {
+    '/observation': {
         ...getObservations,
         ...postObservation,
     },
-    '/observations/{id}': {
+    '/observation/{id}': {
         ...getObservation,
+        ...deleteObservation,
     },
 }

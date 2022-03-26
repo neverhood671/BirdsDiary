@@ -18,11 +18,7 @@ router.get('/:id', (req, res) => {
         .value();
 
     if (!observation) {
-        res.sendStatus(404);
-        return res.send({
-            message: "Observation cannot be found",
-            internal_code: "Invalid id"
-        });
+        return res.sendStatus(404);
     }
     return res.send(observation);
 });
@@ -36,33 +32,12 @@ router.post('/', (req, res) => {
 
     try {
         req.app.db.get("observation").push(observation).write();
-        return res.sendStatus(201).send("Observation saved successfully");
+        return res.sendStatus(201);
     } catch (error) {
-        return res.sendStatus(500).send(error);
+        return res.sendStatus(500);
     }
 });
 
-router.put('/:id', (req, res) => {
-
-    let observation = req.app.db.get("observation").find({
-        id: req.params.id
-    }).value();
-
-    if (!observation) return res.sendStatus(404);
-
-    try {
-        req.app.db.get("observation")
-            .find({
-                id: req.params.id
-            })
-            .assign({completed: !observation['completed']})
-            .write();
-        return res.send("Observation updated");
-    } catch (error) {
-        res.sendStatus(500);
-        return res.send(error);
-    }
-});
 
 router.delete('/:id', (req, res) => {
 

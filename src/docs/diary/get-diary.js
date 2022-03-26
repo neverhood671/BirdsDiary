@@ -1,7 +1,7 @@
 module.exports = {
     get: {
-        tags: ["Observation CRUD operations"],
-        description: "Get an observation by id",
+        tags: ["Diary CRUD operations"],
+        description: "Get a diary by id",
         operationId: "getObservation",
         parameters: [
             {
@@ -11,22 +11,22 @@ module.exports = {
                     $ref: "#/components/schemas/id",
                 },
                 required: true,
-                description: "A single observation id",
+                description: "A single diary id",
             },
         ],
         responses: {
             200: {
-                description: "Observation is obtained",
+                description: "Diary is obtained",
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Observation",
+                            $ref: "#/components/schemas/Diary",
                         },
                     },
                 },
             },
             404: {
-                description: "Observation is not found",
+                description: "Diary is not found",
                 content: {
                     "application/json": {
                         schema: {

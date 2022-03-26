@@ -1,8 +1,8 @@
 module.exports = {
-    get: {
+    delete: {
         tags: ["Observation CRUD operations"],
-        description: "Get an observation by id",
-        operationId: "getObservation",
+        description: "Delete the observation by id",
+        operationId: "deleteObservation",
         parameters: [
             {
                 name: "id",
@@ -16,7 +16,7 @@ module.exports = {
         ],
         responses: {
             200: {
-                description: "Observation is obtained",
+                description: "Observation is deleted",
                 content: {
                     "application/json": {
                         schema: {
