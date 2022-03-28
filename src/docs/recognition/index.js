@@ -1,7 +1,7 @@
 const getRecognition = require('./get-recognition');
 
 module.exports = {
-    '/recognition?desc={desc}': {
+    '/recognition?description={description}': {
         ...getRecognition,
     },
 }

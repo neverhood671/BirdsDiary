@@ -19,6 +19,6 @@ router.get('/', (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            return res.sendStatus(500)
+            return res.send('Sorry, we have no prediction for you =(( Please, try another date or place')
         });
 });
