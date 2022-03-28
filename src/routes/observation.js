@@ -2,14 +2,15 @@ const express = require("express");
 const {
     v4: uuidv4,
 } = require('uuid');
+const {isLoggedIn} = require("../services/auth");
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', isLoggedIn(), (req, res) => {
     let diary = req.app.db.get('observation').value();
     return res.send(diary);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', isLoggedIn(), (req, res) => {
     let observation = req.app.db
         .get('observation')
         .find({
@@ -23,7 +24,7 @@ router.get('/:id', (req, res) => {
     return res.send(observation);
 });
 
-router.post('/', (req, res) => {
+router.post('/', isLoggedIn(),(req, res) => {
 
     let observation = {
         id: uuidv4(),
@@ -39,7 +40,7 @@ router.post('/', (req, res) => {
 });
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isLoggedIn(), (req, res) => {
 
     let observation = req.app.db.get("observation").find({
         id: req.params.id

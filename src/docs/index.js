@@ -4,14 +4,18 @@ const components = require('./components')
 const observations = require('./observation')
 const diaries = require('./diary')
 const users = require('./user')
+const prediction = require('./prediction')
+const recognition = require('./recognition')
 
 module.exports = {
     ...basicInfo,
     ...servers,
     ...components,
     paths: {
-        ...users,
+        ...recognition,
+        ...prediction,
         ...observations,
         ...diaries,
+        ...users,
     },
 };

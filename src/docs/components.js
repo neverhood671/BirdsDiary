@@ -82,6 +82,12 @@ module.exports = {
                     }
                 },
             },
+            Prediction: {
+                type: "object",
+                properties: {
+                    type: "array"
+                }
+            },
             Error: {
                 type: "object",
                 properties: {
